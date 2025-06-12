@@ -8,6 +8,7 @@ import numpy as np
 from tqdm import tqdm
 
 player_categories = {
+    'assists': {"weight": 2},
     'fieldGoalsAttempted': {"weight": -1},
     'fieldGoalsMade': {"weight": 2},
     'threePointersAttempted': {"weight": -0.5},
@@ -20,7 +21,7 @@ player_categories = {
     "win": {"weight": 1}
 }
 
-NUM_OF_DRAFTED_PLAYERS = len(player_categories)
+NUM_OF_DRAFTED_PLAYERS = 10
 
 def hash_id(s):
     return hashlib.sha256(s.encode()).hexdigest()[:10] 
@@ -76,6 +77,7 @@ def score_team_on_season(team, season):
     Get the score of a given team in a praticular season
     returns a dictionary of score by category.
     """
+
 
     cat_dicts = dict([(cat, season_by_category(season, cat, cat_dict["weight"]))
                       for cat, cat_dict in player_categories.items()])
